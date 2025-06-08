@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语口语训练平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #facc15;
+            --danger: #f87171;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center; /* 修改为居中 */
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .training-principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .principle-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .principle-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .principle-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .training-phase {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .phase-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .phase-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .phase-content {
+            padding-left: 60px;
+        }
+        
+        .phase-content ol {
+            padding-left: 1.5rem;
+        }
+        
+        .phase-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .material-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .material-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .material-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .material-id {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .material-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .material-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+        
+        .material-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .material-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+        
+        .btn-icon {
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-view {
+            background-color: var(--primary);
+            color: white;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalOpen 0.4s ease;
+        }
+        
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .material-detail {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+        
+        .detail-section h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-section-content {
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+            margin-left: 10px;
+        }
+        
+        .detail-section-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .dialogue {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .phrase-highlight {
+            background: #fff9db;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: white;
+            margin-top: 3rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .disclaimer strong {
+            color: var(--danger);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .material-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .training-principles {
+                grid-template-columns: 1fr;
+            }
+            
+            .phase-content {
+                padding-left: 0;
+                padding-top: 1rem;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-language"></i>
+                <h1>英语口语训练平台</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    训练原则
+                </h2>
+            </div>
+            <div class="training-principles">
+                <div class="principle-card">
+                    <h4><i class="fas fa-bullseye"></i> 目标明确</h4>
+                    <p>每个训练单元都有明确的学习目标，帮助您循序渐进地提高口语能力。</p>
+                </div>
+                <div class="principle-card">
+                    <h4><i class="fas fa-comments"></i> 实践为主</h4>
+                    <p>通过大量实际对话练习，培养自然流畅的口语表达能力。</p>
+                </div>
+                <div class="principle-card">
+                    <h4><i class="fas fa-chart-line"></i> 循序渐进</h4>
+                    <p>从基础到进阶，按照难度梯度设计课程，确保学习效果。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    训练阶段
+                </h2>
+            </div>
+            <div class="training-phase">
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-icon">
+                            <i class="fas fa-1"></i>
+                        </div>
+                        <h3 class="phase-title">基础对话</h3>
+                    </div>
+                    <div class="phase-content">
+                        <ol>
+                            <li>学习日常对话中的基本表达</li>
+                            <li>掌握常用问候语和礼貌用语</li>
+                            <li>练习简单的自我介绍</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-icon">
+                            <i class="fas fa-2"></i>
+                        </div>
+                        <h3 class="phase-title">情境对话</h3>
+                    </div>
+                    <div class="phase-content">
+                        <ol>
+                            <li>学习特定场景下的对话技巧</li>
+                            <li>掌握相关词汇和表达方式</li>
+                            <li>进行角色扮演练习</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-icon">
+                            <i class="fas fa-3"></i>
+                        </div>
+                        <h3 class="phase-title">深度交流</h3>
+                    </div>
+                    <div class="phase-content">
+                        <ol>
+                            <li>学习表达复杂观点和想法</li>
+                            <li>掌握辩论和讨论技巧</li>
+                            <li>进行主题演讲练习</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-book"></i>
+                    学习材料
+                </h2>
+            </div>
+            <div class="material-grid">
+                <!-- 材料卡片将通过JavaScript动态加载 -->
+            </div>
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
