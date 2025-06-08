@@ -68,6 +68,9 @@ async function showMaterialDetail(id) {
         if (!response.ok) throw new Error('材料内容加载失败');
         const markdownContent = await response.text();
         
+        // 解析Markdown
+        const contentHtml = parseMarkdown(markdownContent);
+        
         // 更新URL添加参数
         window.history.pushState({}, '', `?material=${id}`);
         
@@ -85,8 +88,8 @@ async function showMaterialDetail(id) {
                 
                 <div class="detail-section">
                     <h3><i class="fas fa-book"></i> 训练内容</h3>
-                    <div class="detail-section-content">
-                        ${markdownContent}
+                    <div class="detail-section-content markdown-content">
+                        ${contentHtml}
                     </div>
                 </div>
             </div>
